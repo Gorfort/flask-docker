@@ -38,10 +38,9 @@ jobs:
         - name: login to GitHub Package Registry  # Connexion à GitHub Container Registry
           uses: docker/login-action@v3  # Utilise l'action de login Docker
           with:  # Avec ces paramètres
-            registry: ghcr.io  # URL du registre
             username: ${{ vars.DOCKERHUB_USERNAME }} # Expliquer dans porfolio
             password: ${{ secrets.DOCKERHUB_TOKEN }}
-            
+
         - name: get metadata  # Récupère les métadonnées pour Docker
           id: metadata  # ID pour cette étape
           uses: docker/metadata-action@v5  # Utilise l'action de métadonnées
