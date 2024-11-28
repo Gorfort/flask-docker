@@ -41,6 +41,7 @@ jobs:
             registry: ghcr.io  # URL du registre
             username: ${{ vars.DOCKERHUB_USERNAME }} # Expliquer dans porfolio
             password: ${{ secrets.DOCKERHUB_TOKEN }}
+            
         - name: get metadata  # Récupère les métadonnées pour Docker
           id: metadata  # ID pour cette étape
           uses: docker/metadata-action@v5  # Utilise l'action de métadonnées
@@ -55,7 +56,7 @@ jobs:
           uses: docker/build-push-action@v5  # Utilise l'action de build et push Docker
           with:  # Avec ces paramètres
             push: true  # Pousse l'image
-            tags: docker.io/${{ vars.DOCKERHUB_USERNAME }}/flask-docker:${{ steps.date.outputs.date }} # Expliquer dans Portfolio
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/flask-docker:${{ steps.date.outputs.date }} # Expliquer dans Portfolio
             context: .  # Contexte pour la construction Docker
             cache-from: type=gha  # Utilise le cache GitHub Actions
             cache-to: type=gha,mode=max  # Enregistre le cache pour les utilisations futures
