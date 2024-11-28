@@ -1,0 +1,19 @@
+name: lint
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: recup repo
+        uses: actions/checkout@v4
+      - name: install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: install deps
+        run: |
+          pip install --quiet --upgrade --requirement requirements.txt
+      - name: install flake & pylint
+        run: |
+          flake8 --ignore=E501,E231 *.py
+          pylint --errors-only --disable=C0301 --disable=C0326 *.py
