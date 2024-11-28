@@ -9,7 +9,7 @@ jobs:
       - name: install python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.8'
       - name: install deps
         run: |
           pip install --quiet --upgrade --requirement requirements.txt
@@ -17,3 +17,7 @@ jobs:
         run: |
           flake8 --ignore=E501,E231 *.py
           pylint --errors-only --disable=C0301 --disable=C0326 *.py
+      - name: unitest
+        run: |
+          python -m unittest --verbose --failfast
+      
